@@ -21,8 +21,6 @@ for data in reader:
 			
 			time_d = int(int(time_d.total_seconds())/(60 * 60 * 24))
 			
-			print time_d
-			
 			if time_d <= 1:
 				epoch_key = "in last day"
 			elif time_d <= 7:

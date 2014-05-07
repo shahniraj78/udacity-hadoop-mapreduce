@@ -19,7 +19,7 @@ for data in reader:
 			curr_time = datetime.now()
 			time_d = curr_time - ques_dt
 			
-			time_d = int(int(time_d.total_seconds())/(60 * 24))
+			time_d = int(int(time_d.total_seconds())/(60 * 60 * 24))
 			
 			print time_d
 			

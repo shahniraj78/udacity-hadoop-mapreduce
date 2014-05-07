@@ -29,19 +29,23 @@ for data in reader:
 				epoch_key = "old"
 				
 			if epoch_key:
-				for word in re.split(r'[\s\.\?\(\)\<\>\/\[\],!#=\-;\:\"\$]',data[4]):
-					if not word == "":
-						lower_word = word.lower()
-						dict_key = "%s:%s" %(lower_word,epoch_key)
-						if questions_epoch_dict.has_key(dict_key):
-							node_list = questions_epoch_dict[dict_key]
-							if not node_id in node_list:
-								node_list.append(node_id)
-								questions_epoch_dict[dict_key] = node_list
-						else:
-							questions_epoch_dict[dict_key]  = [node_id]
-							
+				tagslist = data[2]
+				if tagslist:
+					tags = tagslist.split(" ")
+					if tags:
+						for word in tags:
+							if not word == "":
+								lower_word = word.lower()
+								dict_key = "%s:%s" %(lower_word,epoch_key)
+								if questions_epoch_dict.has_key(dict_key):
+									node_list = questions_epoch_dict[dict_key]
+									if not node_id in node_list:
+										node_list.append(node_id)
+										questions_epoch_dict[dict_key] = node_list
+								else:
+									questions_epoch_dict[dict_key]  = [node_id]
+									
 if questions_epoch_dict:
-	print questions_epoch_dict
+	#print questions_epoch_dict
 	for tag_epoch, q_list in questions_epoch_dict.items():
 		print "%s\t%s" %(tag_epoch,",".join(q_list))

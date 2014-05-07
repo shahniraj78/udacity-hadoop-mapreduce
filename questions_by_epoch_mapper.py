@@ -25,6 +25,8 @@ for data in reader:
 				epoch_key = "in last day"
 			elif time_d <= 7:
 				epoch_key = "in past week"
+			else:
+				epoch_key = "old"
 				
 			if epoch_key:
 				for word in re.split(r'[\s\.\?\(\)\<\>\/\[\],!#=\-;\:\"\$]',data[4]):

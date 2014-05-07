@@ -19,9 +19,9 @@ for data in reader:
 			curr_time = datetime.now()
 			time_d = curr_time - ques_dt
 			
-			if time_d <= 1:
+			if time_d.days <= 1:
 				epoch_key = "in last day"
-			elif time_d <= 7:
+			elif time_d.days <= 7:
 				epoch_key = "in past week"
 				
 			if epoch_key:

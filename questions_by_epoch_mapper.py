@@ -37,5 +37,5 @@ for data in reader:
 							questions_epoch_dict[dict_key]  = [node_id]
 							
 if questions_epoch_dict():
-	for tag_epoch, q_list in questions_epoch_dict.items()
+	for tag_epoch, q_list in questions_epoch_dict.items():
 		print "%s\t%s" %(tag_epoch,",".join(q_list))

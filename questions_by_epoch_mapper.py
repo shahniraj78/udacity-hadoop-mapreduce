@@ -34,8 +34,8 @@ for data in reader:
 							if not node_id in node_list:
 								node_list.append(node_id)
 								questions_epoch_dict[dict_key] = node_list
-							else:
-								questions_epoch_dict[dict_key]  = [node_id]
+						else:
+							questions_epoch_dict[dict_key]  = [node_id]
 							
 if questions_epoch_dict:
 	print questions_epoch_dict

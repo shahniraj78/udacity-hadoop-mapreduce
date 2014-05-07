@@ -12,3 +12,4 @@ questions_epoch_dict = dict()
 
 for data in reader:
 	if data:
+		

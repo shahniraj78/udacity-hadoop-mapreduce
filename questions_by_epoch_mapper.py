@@ -17,7 +17,7 @@ for data in reader:
 			epoch_key = None
 			ques_dt = datetime.strptime(data[8].split("+")[0],"%Y-%m-%d %H:%M:%S.%f")
 			curr_time = datetime.now()
-			time_d = int((curr_time - ques_dt)/timedelta(day=1))
+			time_d = int((curr_time - ques_dt)/timedelta(days=1))
 			
 			if time_d <= 1:
 				epoch_key = "in last day"

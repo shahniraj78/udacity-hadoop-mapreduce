@@ -19,7 +19,7 @@ for line in sys.stdin:
 					tag_epoch_qlist.append(q_list)
 					questions_epoch_dict[tag_epoch_key] = tag_epoch_qlist
 			else:
-				questions_epoch_dict[tag_epoch_key] = q_list
+				questions_epoch_dict[tag_epoch_key] = [q_list]
 
 if questions_epoch_dict:
 	for tag_epoch_key,q_list in questions_epoch_dict.items():

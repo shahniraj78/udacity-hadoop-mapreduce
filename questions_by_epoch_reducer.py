@@ -24,4 +24,5 @@ for line in sys.stdin:
 if questions_epoch_dict:
 	for tag_epoch_key,q_list in questions_epoch_dict.items():
 		tag,epoch = tag_epoch_key.split(":")
-		print "%s\t%s\t%s\t%s" %(tag,epoch,len(q_list.split(",")),",".join(q_list))
+		q_cnt = sum(q) for q in q_list
+		print "%s\t%s\t%s\t%s" %(tag,epoch,q_cnt,",".join(q_list))

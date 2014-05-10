@@ -13,21 +13,21 @@ questions_epoch_dict = dict()
 for data in reader:
 	if data:# Skip the header row
 		node_id = data[0].strip('"')
-		if node_id.lower() != "id":
+		if node_id.lower() != "id" and data[5] == "question" :
 			epoch_key = None
 			ques_dt = datetime.strptime(data[8].split("+")[0],"%Y-%m-%d %H:%M:%S.%f")
 			curr_time = datetime.now()
+			
 			time_d = curr_time - ques_dt
+			time_d = int(time_d.days)
 			
-			time_d = int(int(time_d.total_seconds())/(60 * 60 * 24))
-			
-			if time_d <= 1:
+			if 0 <= time_d <= 1:
 				epoch_key = "in last day"
-			elif time_d <= 7:
+			elif 1 < time_d <= 7:
 				epoch_key = "in past week"
 			else:
 				epoch_key = "old"
-				
+
 			if epoch_key:
 				tagslist = data[2]
 				if tagslist:

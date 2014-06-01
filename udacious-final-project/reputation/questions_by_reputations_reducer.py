@@ -1,5 +1,23 @@
 #! /usr/bin/python
 
+#Description: This map reduce job combines forum posts and user data to add a fun feature to search that is based on forum topics and user reputations i.e. when searching for a given topic, data computed from this map reduce job will provide # of questions relating to the topic have been created by "Budding" (user reputation < 1000), "Rising Stars" (user reputation between 1000 & 5000), "Stars" (user reputation between 5000 & 15000) & "Superstars" (user reputation > 15000)  
+
+# Requirements : This Map Reduce job requires higher memory allocation (1024 MB instead of Udacity/Cloudera training VM standard 512 MB) 
+
+#MapReduce Design/Pseudo Logic
+#Mapper iterates through forum and user data and outputs the following..
+# 1) user data by labeling it with "user" label and computing the user's assumed reputation ("budding" vs "rising star" vs "star" vs "superstar") based on value from user data's reputation column 
+# 2) forum question data with "post" label, question id, taglist (comma separated), user id
+#Reducer collates the user and question data from mapper outputs and combines the topics from forum questions with reputations from user data and builds the list of questions
+
+#Reducer Design
+# 1) Read each line of mapper output from stdin
+# 2) Identify the record type (user vs post) based on the "user" or "post" label added by mapper for each row
+# 3) Create a dictionary for user data with user_id as key and star reputation as the lookup value  
+# 4) For post data, create a dictionary with "tag" and "user_id" combination as key and question list as the lookup value
+# 5) Combine the data from post and user dictionaries created in Steps 3 & 4 to create a dictionary of tag, reputation and list of questions
+#6) Write the tag, reputation, # of questions and the question list to reducer output
+
 import sys
 
 questions_by_reputation = dict()
@@ -15,7 +33,7 @@ for line in sys.stdin:
 		user,user_id,rep = data
 		user_reputation_dict[user_id] = rep
 	else:
-		post,node_id,taglist,user_id,node_type = data
+		post,node_id,taglist,user_id = data
 		if taglist:
 			tags = taglist.split(",")
 			if tags:

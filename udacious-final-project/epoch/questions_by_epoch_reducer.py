@@ -1,5 +1,16 @@
 #! /usr/bin/python
 
+#Description: Provides the timing dimension and summarization of questions relating to forum topics i.e. for a given tag/topic, computes the timeframe ( < 1 day : in last day, < 7 days : in pask week, > 7 days : old), total # of questions and list of questions falling in that timeframe 
+
+#MapReduce Design/Pseudo Logic
+#Mapper iterates through data, creates a dictionary that uses combination of tag and time as key and list of questions as the value
+#Reducer creates a dictionary that collates outputs from mapper and publishes the tag, time, count of questions and list of questions
+
+#Reducer Design
+# 1) Read and Loop through all mapper output
+# 2) Build a dictionary that collates all the mapper output to get a complete list of tags, epoch and list of questions 
+# 4) Iterate through dictionary created in Step #2 and write to output for each tag and epoch, total # of questions and list of questions
+
 import sys
 import csv
 import re
@@ -26,3 +37,4 @@ if questions_epoch_dict:
 		tag,epoch = tag_epoch_key.split(":")
 		q_list_str = ",".join(q_list)
 		print "%s\t%s\t%s\t%s" %(tag,epoch,len(q_list_str.split(",")),q_list_str)
+
